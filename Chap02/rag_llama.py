@@ -42,8 +42,6 @@ def main():
         embed_model=embed_model
     )
     set_global_service_context(service_context)
-    # TODO: comment out unneeded explicit references to service_context
-    # (but leave in for documentation purposes)
 
     # Load or create the VectorStore
     vector_store = None
