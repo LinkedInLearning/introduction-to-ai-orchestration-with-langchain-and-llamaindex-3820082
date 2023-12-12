@@ -4,6 +4,8 @@ from llama_index import (
 )
 from llama_index import ServiceContext
 from llama_index.chat_engine import ContextChatEngine
+# pip install transformers
+# pip install torch
 from llama_index.embeddings import HuggingFaceEmbedding
 from llama_index.indices.vector_store import VectorStoreIndex
 from llama_index.llms import OpenAILike
