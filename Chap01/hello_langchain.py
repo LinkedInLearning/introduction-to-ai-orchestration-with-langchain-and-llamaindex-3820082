@@ -25,7 +25,7 @@ prompt = PromptTemplate(
 chain = prompt | llm | StrOutputParser()
 result = chain.invoke({"user_input": user_input})
 
-#print(result)
+print(result)
 
 # for streaing use
 #results = chain.stream({"user_input": user_input})
