@@ -61,6 +61,6 @@ def with_pydantic_output_formatter():
 
 
 if __name__ == "__main__":
-    #baseline()
-    #with_guided_prompt()
+    baseline()
+    with_guided_prompt()
     with_pydantic_output_formatter()
