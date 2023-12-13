@@ -1,9 +1,10 @@
 import argparse
 import os
 from langchain.chains import ConversationalRetrievalChain
-# pip install unstructured[rst]
 from langchain.chat_models.openai import ChatOpenAI
 from langchain.document_loaders import DirectoryLoader, Docx2txtLoader
+# pip install torch
+# pip install sentence_transformers
 from langchain.embeddings import SentenceTransformerEmbeddings
 from langchain.memory import ConversationBufferMemory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -41,7 +42,10 @@ def main():
             glob="**/*.docx"  # which files get loaded
         )
         docs = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=75)
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=500,
+            chunk_overlap=75
+        )
         frags = text_splitter.split_documents(docs)
 
         print(f"Poplulating vector store with {len(docs)} docs in {len(frags)} fragments")
@@ -60,7 +64,7 @@ def main():
         memory_key="chat_history",
         return_messages=True
     )
-    print(memory.load_memory_variables({}))
+    memory.load_memory_variables({})
     qa_chain = ConversationalRetrievalChain.from_llm(
         llm=llm,
         memory=memory,
