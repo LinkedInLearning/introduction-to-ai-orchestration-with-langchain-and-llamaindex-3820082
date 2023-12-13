@@ -13,7 +13,7 @@ def get_weather_for_city(city: str):
         city (str): The city name, e.g. San Francisco
 
     Returns:
-        bool: A JSON formatted report with fields 'city' and 'temperature'
+        str: A JSON formatted report with fields 'city' and 'temperature'
     """
     print(f"Calling local get_weather_for_city for {city}")
     return json.dumps({"city": city, "temperature": random.randint(1,50)})
