@@ -14,7 +14,7 @@ import os
 os.environ["BING_SEARCH_URL"] = "https://api.bing.microsoft.com/v7.0/search"
 
 llm = ChatOpenAI(
-    base_url="http://localhost:1234/v1/",
+    #base_url="http://localhost:1234/v1/",
     temperature=0
 )
 
@@ -31,8 +31,11 @@ tools = [
     ),
 ]
 
-memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True, output_key="output")
-
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    return_messages=True,
+    output_key="output"
+)
 agent = initialize_agent(
     tools,
     llm,
@@ -41,7 +44,6 @@ agent = initialize_agent(
     memory=memory,
     handle_parsing_errors=True
 )
-
 
 pydict = agent.invoke({"input": "Hi, I am Bob"})
 print(pydict["output"])
