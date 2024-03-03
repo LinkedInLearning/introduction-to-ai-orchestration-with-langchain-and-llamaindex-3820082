@@ -29,8 +29,55 @@ Welcome to the course! AI is a fast-changing field, so be sure to check this rep
    pip install --upgrade openai
    pip install --upgrade langchain
    pip install --upgrade llama-index
+   pip install --upgrade langchain-openai
    ```
 6. Specific projects in this course might have additional optional requirements. If so, it will be noted within the relevant video.
+
+### Updates
+
+Recent versions of LM Studio have changed the UI from what's shown in the videos. These are generally welcome
+improvements. For example the maximum context length and other model parameters are viewable in the sidebar.
+
+Recent versions of LlamaIndex have changed their import and package structure in a way that breaks existing code.
+In many cases, you can fix imports as follows:
+
+   ```
+   # before
+   from llama_index.llms import OpenAILike
+
+   # after
+   from llama_index.core.llms import OpenAILike
+   ```
+
+Specific third party components require installing new packages. These will be noted in comments. Example:
+   ```
+   # pip install llama-index-embeddings-huggingface
+   from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+   ```
+
+For code in Chap04, From March 1, 2024, LlamaHub has been deprecated and most projects migrated into LlamaIndex. (sort of--it's complicated)
+Specifically:
+   ```
+   # before
+   # pip install llama_hub
+   from llama_hub.tools.bing_search import BingSearchToolSpec
+
+   # after
+   # pip install llama-index-tools-bing-search
+   from llama_index.tools.bing_search import BingSearchToolSpec
+   ```
+
+Additionally, LlamaIndex `ServiceContext` has been deprecated and replaced with `Settings`. See Ch02/rag_llamaindex.py for updated sample code.
+
+LangChain too has changed their import structure, though as of this writing it produces warnings rather than errors. In many cases you will need to import from langchain_community or langchain_openai as follows:
+   ```
+   #before
+   from langchain.chat_models import ChatOpenAI
+
+   # after
+   # pip install langchain-openai
+   from langchain_openai.chat_models import ChatOpenAI
+   ```
 
 ### Instructor
 
@@ -41,7 +88,6 @@ Software Generalist | Consultant | Instructor | Problem Solver
 Check out my other courses on [LinkedIn Learning][URL-instructor-home].
 
 
-[0]: # (Replace these placeholder URLs with actual course URLs)
 
 [lil-course-url]: https://www.linkedin.com/learning/introduction-to-ai-orchestration-with-langchain-and-llamaindex
 [lil-thumbnail-url]: https://media.licdn.com/dms/image/D560DAQEi6KQmA4fF1Q/learning-public-crop_675_1200/0/1707936616297?e=2147483647&v=beta&t=3vzvDRzpKq9Nd99ss8r2pqMZmyTOKYgKwk825XoSEHU

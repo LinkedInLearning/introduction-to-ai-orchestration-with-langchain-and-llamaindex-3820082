@@ -1,19 +1,20 @@
 import argparse
-from llama_index import (
-    load_index_from_storage, set_global_service_context
+from llama_index.core import (
+    Settings, load_index_from_storage
 )
-from llama_index import ServiceContext
-from llama_index.chat_engine import ContextChatEngine
+from llama_index.core.chat_engine import ContextChatEngine
 # pip install transformers
 # pip install torch
-from llama_index.embeddings import HuggingFaceEmbedding
-from llama_index.indices.vector_store import VectorStoreIndex
-from llama_index.llms import OpenAILike
-from llama_index.query_engine import RetrieverQueryEngine
+# pip install llama-index-embeddings-huggingface
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+from llama_index.core.indices.vector_store import VectorStoreIndex
+# pip install llama-index-llms-openai-like
+from llama_index.llms.openai_like import OpenAILike
+from llama_index.core.query_engine import RetrieverQueryEngine
 # pip install docx2txt to read Microsoft Word files
-from llama_index.readers import SimpleDirectoryReader
-from llama_index.retrievers import VectorIndexRetriever
-from llama_index.storage import StorageContext
+from llama_index.core.readers import SimpleDirectoryReader
+from llama_index.core.retrievers import VectorIndexRetriever
+from llama_index.core.storage import StorageContext
 import os
 
 os.environ["TOKENIZERS_PARALLELISM"] = "false" # workaround for HuggingFace FastTokenizers
@@ -37,13 +38,10 @@ def main():
         temperature=0.6,
     )
 
-    service_context = ServiceContext.from_defaults(
-        llm=llm,
-        chunk_size=512,
-        chunk_overlap=64,
-        embed_model=embed_model
-    )
-    set_global_service_context(service_context)
+    Settings.llm = llm
+    Settings.chunk_size = 512
+    Settings.chunk_overlap = 64
+    Settings.embed_model = embed_model
 
     # Load or create the VectorStore
     vector_store = None
@@ -53,8 +51,7 @@ def main():
             persist_dir=args.persist_dir,
         )
         vector_store = load_index_from_storage(
-            storage_context=storage_context,
-            service_context=service_context
+            storage_context=storage_context
             )
         print("done")
     else:
@@ -63,7 +60,7 @@ def main():
 
         # production apps may require a more tailored approach to loading & splitting docs
 
-        vector_store = VectorStoreIndex.from_documents(documents, service_context=service_context)
+        vector_store = VectorStoreIndex.from_documents(documents)
         print(f"Persisting vector store to: {args.persist_dir}")
         os.mkdir(args.persist_dir)
         vector_store.storage_context.persist(persist_dir=args.persist_dir)
@@ -74,14 +71,12 @@ def main():
 
     retriever = VectorIndexRetriever(vector_store)
     query_engine = RetrieverQueryEngine.from_args(
-        retriever=retriever,
-        service_context=service_context
+        retriever=retriever
     )
 
     chat_engine = ContextChatEngine.from_defaults(
         retriever=retriever,
         query_engine=query_engine,
-        service_context=service_context,
         verbose=True
     )
 

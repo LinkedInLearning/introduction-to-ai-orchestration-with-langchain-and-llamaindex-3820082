@@ -1,4 +1,6 @@
-from llama_index.llms import ChatMessage, OpenAILike
+# pip install llama-index-llms-openai-like
+from llama_index.llms.openai_like import OpenAILike
+from llama_index.core.llms import ChatMessage
 
 prompt = ChatMessage(
     role="user",
@@ -33,7 +35,7 @@ def with_guided_prompt():
 def with_openai_pydantic():
     print("2. OpenAIPydandicProgram")
     from pydantic import BaseModel, Field
-    from llama_index.program import OpenAIPydanticProgram
+    from llama_index.program.openai import OpenAIPydanticProgram
 
     class WeatherReport(BaseModel):
         "A concise weather report for a single city"

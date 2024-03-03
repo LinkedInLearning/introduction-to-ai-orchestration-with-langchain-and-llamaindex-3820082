@@ -1,5 +1,6 @@
-from langchain.chat_models import ChatOpenAI
-from langchain.chains.openai_functions import create_openai_fn_runnable
+# pip install langchain-openai
+from langchain_openai.chat_models import ChatOpenAI
+from langchain.chains.structured_output import create_openai_fn_runnable
 from langchain.prompts import ChatPromptTemplate
 import json
 import random
@@ -33,9 +34,3 @@ chain = create_openai_fn_runnable([get_weather_for_city], llm, prompt)
 response = chain.invoke({"location": "Miami"})
 
 print(response)
-
-
-
-
-
-

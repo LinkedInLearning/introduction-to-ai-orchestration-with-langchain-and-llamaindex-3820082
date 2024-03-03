@@ -1,11 +1,13 @@
 import argparse
 import os
 from langchain.chains import ConversationalRetrievalChain
-from langchain.chat_models.openai import ChatOpenAI
-from langchain.document_loaders import DirectoryLoader, Docx2txtLoader
+# pip install langchain-openai
+from langchain_openai import ChatOpenAI
+# pip install langchain-community
+from langchain_community.document_loaders import DirectoryLoader, Docx2txtLoader
 # pip install torch
 # pip install sentence_transformers
-from langchain.embeddings import SentenceTransformerEmbeddings
+from langchain_community.embeddings import SentenceTransformerEmbeddings
 from langchain.memory import ConversationBufferMemory
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 # pip install faiss-gpu # For CUDA 7.5+ Supported GPU

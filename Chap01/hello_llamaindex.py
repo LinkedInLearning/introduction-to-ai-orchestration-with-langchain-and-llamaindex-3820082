@@ -1,4 +1,6 @@
-from llama_index.llms import ChatMessage, OpenAILike
+# pip install llama-index-llms-openai-like
+from llama_index.llms.openai_like import OpenAILike
+from llama_index.core.llms import ChatMessage
 
 application_prompt = """Given the following short description
     of a particular topic, write 3 attention-grabbing headlines 

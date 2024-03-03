@@ -1,6 +1,7 @@
-from llama_index.agent import OpenAIAgent
-from llama_index.llms import OpenAI
-from llama_index.tools import FunctionTool
+# pip install llama-index-agent-openai
+from llama_index.agent.openai import OpenAIAgent
+from llama_index.llms.openai import OpenAI
+from llama_index.core.tools import FunctionTool
 import json
 import random
 

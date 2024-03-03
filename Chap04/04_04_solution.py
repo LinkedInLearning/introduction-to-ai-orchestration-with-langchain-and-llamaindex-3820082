@@ -1,5 +1,6 @@
 from langchain.agents import AgentType, Tool, initialize_agent
-from langchain.chat_models import ChatOpenAI
+# pip install langchain-openai
+from langchain_openai.chat_models import ChatOpenAI
 from langchain.memory import ConversationBufferMemory
 
 #  In order to set this Bing search, go to

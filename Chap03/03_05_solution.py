@@ -1,7 +1,8 @@
 import datetime
 import random
 from langchain.chains import ConversationChain
-from langchain.chat_models.openai import ChatOpenAI
+# pip install langchain-openai
+from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 import re
 

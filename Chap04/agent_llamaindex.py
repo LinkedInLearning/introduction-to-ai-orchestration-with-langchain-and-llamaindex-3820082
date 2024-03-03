@@ -1,12 +1,13 @@
-from llama_index.tools import QueryEngineTool, ToolMetadata
-from llama_index.agent import ReActAgent
-from llama_index.llms import OpenAILike
-# pip install llama_hub
-# In order to set this Bing search, go to
+from llama_index.core.tools import QueryEngineTool, ToolMetadata
+from llama_index.core.agent import ReActAgent
+# pip install llama-index-llms-openai-like
+from llama_index.llms.openai_like import OpenAILike
+# pip install llama-index-tools-bing-search
+# In order to set up Bing search, go to
 # https://www.microsoft.com/en-us/bing/apis/bing-web-search-api
 # and click "Try now" to get a Bing web search API key
 # put your API key in the env variable BING_SUBSCRIPTION_KEY
-from llama_hub.tools.bing_search import BingSearchToolSpec
+from llama_index.tools.bing_search import BingSearchToolSpec
 
 import os
 api_key = os.environ["BING_SUBSCRIPTION_KEY"]

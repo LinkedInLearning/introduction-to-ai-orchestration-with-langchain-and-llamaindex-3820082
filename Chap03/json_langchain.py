@@ -1,4 +1,5 @@
-from langchain.chat_models import ChatOpenAI
+# pip install langchain-openai
+from langchain_openai.chat_models import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema import HumanMessage, SystemMessage
 from langchain.schema.runnable.config import RunnableConfig

@@ -1,5 +1,7 @@
-from llama_index.llms import ChatMessage, OpenAILike
-from llama_index.readers import SimpleDirectoryReader
+# pip install llama-index-llms-openai-like
+from llama_index.llms.openai_like import OpenAILike
+from llama_index.core.llms import ChatMessage
+from llama_index.core.readers import SimpleDirectoryReader
 
 application_prompt = """Given the following documents,
     summarize them so that each section contains only the most
